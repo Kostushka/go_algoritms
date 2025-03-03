@@ -1,12 +1,12 @@
 package main
 
-import "fmt"
+// import "fmt"
 
 func main() {
 	arr := []int{21, 93, 23, 61, 82, 13, 12, 45}
-	fmt.Println("before:", arr)
+	// fmt.Println("before:", arr)
 	selectionSort(arr)
-	fmt.Println("after:", arr)
+	// fmt.Println("after:", arr)
 }
 
 // Вычислительная сложность алгоритма: O(n^2)
