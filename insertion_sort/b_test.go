@@ -46,7 +46,7 @@ func BenchmarkSelectionSort(b *testing.B) {
 			insertionSort(negative)
 		}
 	})
-	b.Run("positive", func(b *testing.B) {
+	b.Run("sorted", func(b *testing.B) {
 		for b.Loop() {
 			insertionSort(sorted)
 		}
