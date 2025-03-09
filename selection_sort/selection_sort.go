@@ -13,22 +13,19 @@ func main() {
 // Пространственная сложность алгоритма: О(1)
 func selectionSort(arr []int) {
 	var min int
-	var isChange bool
 
 	// проходим по всем элементам кроме последнего
-	for j := 0; j < len(arr)-1; j++ {
-		min = j
-		isChange = false
+	for i := 0; i < len(arr)-1; i++ {
+		min = i
 		// находим индекс самого маленького элемента из оставшихся относительно текущего
-		for i := j + 1; i < len(arr); i++ {
-			if arr[min] > arr[i] {
-				min = i
-				isChange = true
+		for j := i + 1; j < len(arr); j++ {
+			if arr[min] > arr[j] {
+				min = j
 			}
 		}
 		// текущий элемент должен быть самым маленьким из оставшихся неотсортированных
-		if isChange {
-			arr[j], arr[min] = arr[min], arr[j]
+		if i != min {
+			arr[i], arr[min] = arr[min], arr[i]
 		}
 		// fmt.Println(arr)
 	}

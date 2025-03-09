@@ -1,8 +1,8 @@
 package main
 
 import (
-	"reflect"
 	"testing"
+	"github.com/Kostushka/go_algoritms/test"
 )
 
 type data struct {
@@ -23,7 +23,7 @@ func TestBubbleSort(t *testing.T) {
 		bubbleSort(v.x)
 
 		// проверка
-		if reflect.DeepEqual(v.x, v.expected) == false {
+		if !test.Equal(v.x, v.expected) {
 			t.Errorf("expected %d, but got %d\n", v.expected, v.x)
 		}
 	}

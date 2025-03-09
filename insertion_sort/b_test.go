@@ -35,7 +35,7 @@ func init() {
 	}
 }
 
-func BenchmarkSelectionSort(b *testing.B) {
+func BenchmarkInsertionSort(b *testing.B) {
 	b.Run("random", func(b *testing.B) {
 		for b.Loop() {
 			insertionSort(random)
