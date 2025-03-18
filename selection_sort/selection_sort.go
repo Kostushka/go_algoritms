@@ -15,10 +15,14 @@ func selectionSort(arr []int) {
 	var min int
 
 	// проходим по всем элементам кроме последнего
+	loop:
 	for i := 0; i < len(arr)-1; i++ {
 		min = i
 		// находим индекс самого маленького элемента из оставшихся относительно текущего
 		for j := i + 1; j < len(arr); j++ {
+			if min > 0 && (arr[min] == arr[min-1] || arr[min] == arr[min-1]+1) {
+				continue loop
+			}
 			if arr[min] > arr[j] {
 				min = j
 			}

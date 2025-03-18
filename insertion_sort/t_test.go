@@ -20,7 +20,7 @@ func TestInsertionSort(t *testing.T) {
 
 	for _, v := range d {
 		// тестируемая функция
-		insertionSort(v.x)
+		insertionSort1(v.x)
 
 		// проверка
 		if reflect.DeepEqual(v.x, v.expected) == false {
