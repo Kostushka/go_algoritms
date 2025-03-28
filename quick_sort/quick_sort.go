@@ -1,6 +1,6 @@
 package main
 
-import "fmt"
+// import "fmt"
 /*
 [12, 2, 8, 43, 90, |4|, 9, 18, 11, 34, 89]
 [|4|, (2), 8, 43, 90, 12, 9, 18, 11, 34, 89]
@@ -26,10 +26,12 @@ import "fmt"
 */
 func main() {
 	// arr := []int{34, 2, 1, 45, 23, 12, 62, 13, 6}
-	arr := []int{12, 2, 8, 43, 90, 4, 9, 18, 11, 34, 89}
-	fmt.Println(arr)
+	arr := []int{12, 2, 8, 43, 90, 4, 9, 18, 11, 34, 89, 4}
+	// fmt.Println(arr)
 	quickSort(arr)
-	fmt.Println(arr)
+	lomutoSort(arr)
+	hoarSort(arr)
+	// fmt.Println(arr)
 }
 
 func quickSort(arr []int) {
@@ -40,10 +42,10 @@ func quickSort(arr []int) {
 	}
 	// fmt.Println("pivot:", arr[len(arr)/2])
 
-	// меняем местами средний элемент с первым
+	// меняем местами опорный элемент с первым
 	arr[0], arr[len(arr) / 2] = arr[len(arr) / 2], arr[0]
 	
-	// индекс среднего элемента
+	// индекс элемента, готового к обмену с элементом, который меньше опорного
 	pivot := 0
 	// проходим по массиву и меняем элементы местами так, чтобы те, которые меньше первого, стояли ближе к нему
 	for i := 1; i < len(arr); i++ {
@@ -54,10 +56,97 @@ func quickSort(arr []int) {
 	}
 	// меняем местами первый элемент с последним из тех, что меньше его
 	arr[0], arr[pivot] = arr[pivot], arr[0]
-	fmt.Println("left:", arr[:pivot])
+	// fmt.Println("left:", arr[:pivot])
 	// сортируем элементы слева от среднего элемента
 	quickSort(arr[:pivot])
-	fmt.Println("right:", arr[pivot+1:])
+	// fmt.Println("right:", arr[pivot+1:])
 	// сортируем элементы справа от среднего элемента
 	quickSort(arr[pivot+1:])
+}
+
+/*
+[12, 2, 8, |43|]
+[12, 2, |8|]  []
+[2, |8|, 12]  
+[2]     [12]
+
+ 2   8   12 43
+ */
+func lomutoSort(arr []int) {
+	// fmt.Println(arr)
+	// условие выхода из рекурсии
+	if len(arr) <= 1 {
+		return
+	}
+	// опорный элемент - последний элемент массива
+	pivot := len(arr) - 1
+
+	// индекс элемента, готового к обмену с элементом, который меньше опорного
+	index := 0
+	// проходим по массиву и переставляем элементы местами так, чтобы те, которые меньше опорного, стояли ближе к левому краю
+	for i := 0; i < len(arr) - 1; i++ {
+		if arr[pivot] > arr[i] {
+			arr[index], arr[i] = arr[i], arr[index]
+			index++
+		}
+	}
+	// меняем местами опорный элемент с элементом, который идет сразу после последнего элемента, который меньше опорного
+	arr[index], arr[pivot] = arr[pivot], arr[index]
+	// fmt.Println("left:", arr[:index])
+	// сортируем элементы слева от опорного элемента
+	lomutoSort(arr[:index])
+	// fmt.Println("right:", arr[index+1:])
+	// сортируем элементы справа от опорного элемента
+	lomutoSort(arr[index+1:])
+}
+
+
+/*
+[12, 2, |8|, 43, 8]
+[8, 2, |8|, 43, 12]
+[8, 2, |8|, 43, 12]
+[2, 8, |8|, 43, 12]
+[2]    [8, |43|, 12]
+       [8, 12, |43|]
+       [8, |12|]  []
+       [8]  []
+
+2  8   8   12   43
+*/
+func hoarSort(arr []int) {
+	// условие выхода из рекурсии
+	if len(arr) <= 1 {
+		return
+	}
+	
+	start := 0
+	end := len(arr) - 1
+	pivot := arr[len(arr) / 2]
+
+	for {
+		// fmt.Println(arr, "start:", arr[start], "pivot:", pivot, "end:", arr[end])
+		// идем по массиву от первого элемента до элемента, который больше или равен опорному
+		for arr[start] < pivot {
+			start++
+		}
+		// идем по массиву от последнего элемента до элемента, который меньше или равен опорному
+		for arr[end] > pivot {
+			end--
+		}
+		if arr[start] == pivot && arr[end] == pivot {
+			end--
+		}
+		// идем по массиву, пока индексы "первого" и "последнего" элементов не совпали и индекс "первого" элемента меньше индекса "последнего"
+		if start >= end {
+			break
+		}
+		// меняем текущие "первый" и "последний" элемент местами
+		arr[start], arr[end] = arr[end], arr[start]
+	}
+	// fmt.Println("left:", arr[:start])
+	// сортируем подмассив слева от текущего положения опорного элемента
+	hoarSort(arr[:start])
+	// fmt.Println("right:", arr[start+1:])
+	// сортируем подмассив справа от текущего положения опорного элемента
+	hoarSort(arr[start+1:])
 }

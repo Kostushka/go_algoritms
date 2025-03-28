@@ -63,6 +63,54 @@ func BenchmarkQuickSortR(b *testing.B) {
 	})
 }
 
+func BenchmarkLomutoSortR(b *testing.B) {
+	b.Run("random10_000", func(b *testing.B) {
+		rcopy := make([]int, big)
+		for b.Loop() {
+			copy(rcopy, random)
+			lomutoSort(rcopy)
+		} 
+	})
+	b.Run("random5_000", func(b *testing.B) {
+		rcopy := make([]int, middle)
+		for b.Loop() {
+			copy(rcopy, random)
+			lomutoSort(rcopy)
+		}
+	})	
+	b.Run("random100", func(b *testing.B) {
+		rcopy := make([]int, small)
+		for b.Loop() {
+			copy(rcopy, random)
+			lomutoSort(rcopy)
+		}
+	})
+}
+
+func BenchmarkHoarSortR(b *testing.B) {
+	b.Run("random10_000", func(b *testing.B) {
+		rcopy := make([]int, big)
+		for b.Loop() {
+			copy(rcopy, random)
+			hoarSort(rcopy)
+		} 
+	})
+	b.Run("random5_000", func(b *testing.B) {
+		rcopy := make([]int, middle)
+		for b.Loop() {
+			copy(rcopy, random)
+			hoarSort(rcopy)
+		}
+	})	
+	b.Run("random100", func(b *testing.B) {
+		rcopy := make([]int, small)
+		for b.Loop() {
+			copy(rcopy, random)
+			hoarSort(rcopy)
+		}
+	})
+}
+
 func BenchmarkQuickSortN(b *testing.B) {
 	b.Run("negative10_000", func(b *testing.B) {
 		rcopy := make([]int, big)
@@ -87,6 +135,54 @@ func BenchmarkQuickSortN(b *testing.B) {
 	})
 }
 
+func BenchmarkLomutoSortN(b *testing.B) {
+	b.Run("negative10_000", func(b *testing.B) {
+		rcopy := make([]int, big)
+		for b.Loop() {
+			copy(rcopy, negative)
+			lomutoSort(rcopy)
+		} 
+	})
+	b.Run("negative5_000", func(b *testing.B) {
+		rcopy := make([]int, middle)
+		for b.Loop() {
+			copy(rcopy, negative)
+			lomutoSort(rcopy)
+		}
+	})	
+	b.Run("negative100", func(b *testing.B) {
+		rcopy := make([]int, small)
+		for b.Loop() {
+			copy(rcopy, negative)
+			lomutoSort(rcopy)
+		}
+	})
+}
+
+func BenchmarkHoarSortN(b *testing.B) {
+	b.Run("negative10_000", func(b *testing.B) {
+		rcopy := make([]int, big)
+		for b.Loop() {
+			copy(rcopy, negative)
+			hoarSort(rcopy)
+		} 
+	})
+	b.Run("negative5_000", func(b *testing.B) {
+		rcopy := make([]int, middle)
+		for b.Loop() {
+			copy(rcopy, negative)
+			hoarSort(rcopy)
+		}
+	})	
+	b.Run("negative100", func(b *testing.B) {
+		rcopy := make([]int, small)
+		for b.Loop() {
+			copy(rcopy, negative)
+			hoarSort(rcopy)
+		}
+	})
+}
+
 func BenchmarkQuickSortS(b *testing.B) {
 	b.Run("sorted10_000", func(b *testing.B) {
 		rcopy := make([]int, big)
@@ -107,6 +203,54 @@ func BenchmarkQuickSortS(b *testing.B) {
 		for b.Loop() {
 			copy(rcopy, sorted)
 			quickSort(rcopy)
+		}
+	})
+}
+
+func BenchmarkLomutoSortS(b *testing.B) {
+	b.Run("sorted10_000", func(b *testing.B) {
+		rcopy := make([]int, big)
+		for b.Loop() {
+			copy(rcopy, sorted)
+			lomutoSort(rcopy)
+		} 
+	})
+	b.Run("sorted5_000", func(b *testing.B) {
+		rcopy := make([]int, middle)
+		for b.Loop() {
+			copy(rcopy, sorted)
+			lomutoSort(rcopy)
+		}
+	})	
+	b.Run("sorted100", func(b *testing.B) {
+		rcopy := make([]int, small)
+		for b.Loop() {
+			copy(rcopy, sorted)
+			lomutoSort(rcopy)
+		}
+	})
+}
+
+func BenchmarkHoarSortS(b *testing.B) {
+	b.Run("sorted10_000", func(b *testing.B) {
+		rcopy := make([]int, big)
+		for b.Loop() {
+			copy(rcopy, sorted)
+			hoarSort(rcopy)
+		} 
+	})
+	b.Run("sorted5_000", func(b *testing.B) {
+		rcopy := make([]int, middle)
+		for b.Loop() {
+			copy(rcopy, sorted)
+			hoarSort(rcopy)
+		}
+	})	
+	b.Run("sorted100", func(b *testing.B) {
+		rcopy := make([]int, small)
+		for b.Loop() {
+			copy(rcopy, sorted)
+			hoarSort(rcopy)
 		}
 	})
 }
